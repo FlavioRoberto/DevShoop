@@ -4,8 +4,11 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services
+       .AddEndpointsApiExplorer()
+       .AddSwaggerGen()
+       .AddSingleton(MappingConfig.RegisterMaps().CreateMapper())
+       .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var connection = builder.Configuration.GetConnectionString("MySQLConnectionString");
 builder.Services.AddDbContext<ProductApiContext>(options =>
