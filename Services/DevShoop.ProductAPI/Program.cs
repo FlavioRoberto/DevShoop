@@ -8,7 +8,8 @@ builder.Services
        .AddEndpointsApiExplorer()
        .AddSwaggerGen()
        .AddSingleton(MappingConfig.RegisterMaps().CreateMapper())
-       .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+       .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
+       .AddScoped<IProductRepository, ProductRepository>();
 
 var connection = builder.Configuration.GetConnectionString("MySQLConnectionString");
 builder.Services.AddDbContext<ProductApiContext>(options =>
