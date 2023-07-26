@@ -1,5 +1,5 @@
 using DevShoop.ProductAPI.Config;
-using DevShoop.ProductAPI.Presentation.Config;
+using DevShoop.ProductAPI.Application.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,5 @@
 ﻿using DevShoop.ProductAPI.Domain.UseCases.Product;
-using DevShoop.ProductAPI.Presentation.ViewModels;
+using DevShoop.ProductAPI.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevShoop.ProductAPI.Controllers;

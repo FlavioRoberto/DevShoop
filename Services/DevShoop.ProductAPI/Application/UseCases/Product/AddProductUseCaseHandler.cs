@@ -2,7 +2,7 @@
 using DevShoop.ProductAPI.Domain.Repositories;
 using DevShoop.ProductAPI.Domain.UseCases;
 using DevShoop.ProductAPI.Domain.UseCases.Product;
-using DevShoop.ProductAPI.Presentation.ViewModels;
+using DevShoop.ProductAPI.Application.ViewModels;
 
 namespace DevShoop.ProductAPI.Application.UseCases.Product;
 

@@ -1,4 +1,4 @@
-﻿namespace DevShoop.ProductAPI.Presentation.ViewModels;
+﻿namespace DevShoop.ProductAPI.Application.ViewModels;
 
 public class ProductViewModel
 {

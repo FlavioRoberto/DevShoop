@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using DevShoop.ProductAPI.Domain.Models;
 using DevShoop.ProductAPI.Domain.UseCases.Product;
-using DevShoop.ProductAPI.Presentation.ViewModels;
+using DevShoop.ProductAPI.Application.ViewModels;
 
-namespace DevShoop.ProductAPI.Presentation.Config;
+namespace DevShoop.ProductAPI.Application.Config;
 
 public class MappingConfig
 {
