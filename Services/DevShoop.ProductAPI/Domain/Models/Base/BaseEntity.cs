@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DevShoop.ProductAPI;
+namespace DevShoop.ProductAPI.Domain.Models.Base;
 
 public class BaseEntity
 {

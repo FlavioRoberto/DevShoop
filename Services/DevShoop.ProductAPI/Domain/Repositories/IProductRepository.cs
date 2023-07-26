@@ -1,4 +1,6 @@
-﻿namespace DevShoop.ProductAPI;
+﻿using DevShoop.ProductAPI.Domain.Models;
+
+namespace DevShoop.ProductAPI.Domain.Repositories;
 
 public interface IProductRepository
 {

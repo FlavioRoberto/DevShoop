@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DevShoop.ProductAPI.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace DevShoop.ProductAPI;
+namespace DevShoop.ProductAPI.Data.Context;
 
 public class ProductApiContext : DbContext
 {

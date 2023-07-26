@@ -1,5 +1,5 @@
-using DevShoop.ProductAPI;
-using Microsoft.EntityFrameworkCore;
+using DevShoop.ProductAPI.Config;
+using DevShoop.ProductAPI.Presentation.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +9,7 @@ builder.Services
        .AddSwaggerGen()
        .AddSingleton(MappingConfig.RegisterMaps().CreateMapper())
        .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-       .AddScoped<IProductRepository, ProductRepository>();
-
-var connection = builder.Configuration.GetConnectionString("MySQLConnectionString");
-builder.Services.AddDbContext<ProductApiContext>(options =>
-    options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 23))));
+       .AddDependency(builder.Configuration);
 
 var app = builder.Build();
 

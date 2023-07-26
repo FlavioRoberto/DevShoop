@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using DevShoop.ProductAPI.Domain.Models.Base;
 
-namespace DevShoop.ProductAPI;
+namespace DevShoop.ProductAPI.Domain.Models;
 
 [Table("product")]
 public class Product : BaseEntity
