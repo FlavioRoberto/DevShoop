@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using DevShoop.ProductAPI.Domain.Exceptions;
 using DevShoop.ProductAPI.Domain.Models.Base;
 
 namespace DevShoop.ProductAPI.Domain.Models;
@@ -7,26 +7,21 @@ namespace DevShoop.ProductAPI.Domain.Models;
 [Table("product")]
 public class Product : BaseEntity
 {
-    [Column("name")]
-    [Required]
-    [StringLength(150)]
     public string Name { get; set; }
 
-    [Column("price")]
-    [Required]
-    [Range(1, 10000)]
-    public decimal Price { get; set; }
+    public decimal Price { get; private set; }
 
-    [Column("description")]
-    [StringLength(500)]
     public string Description { get; set; }
 
-    [Column("category_name")]
-    [StringLength(50)]
-    [Required]
     public string Category { get; set; }
 
-    [Column("image_url")]
-    [StringLength(300)]
-    public string ImageUrl { get; set;}
+    public string ImageUrl { get; set; }
+
+    public void AddPrice(decimal price)
+    {
+        if (price < 1 || price > 10000)
+            throw new DomainException("price must be beteween 1 and 10000");
+
+        Price = price;
+    }
 }
