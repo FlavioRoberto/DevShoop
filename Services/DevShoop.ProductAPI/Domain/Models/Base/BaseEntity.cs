@@ -1,11 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DevShoop.ProductAPI.Domain.Models.Base;
+﻿namespace DevShoop.ProductAPI.Domain.Models.Base;
 
 public class BaseEntity
 {
-    [Key]
-    [Column("id")]
     public long Id { get; set;}
 }

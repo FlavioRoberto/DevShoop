@@ -12,7 +12,8 @@ public class MappingConfig
             config.CreateMap<ProductViewModel, Product>()
                   .ReverseMap();
 
-            config.CreateMap<AddProductUseCase, Product>();                  
+            config.CreateMap<AddProductUseCase, Product>();
+            config.CreateMap<UpdateProductUseCase, Product>();
         });
     }
 }

@@ -7,6 +7,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddUseCases(this IServiceCollection services)
     {
-        return services.AddScoped<IAddProductUseCase, AddProductUseCaseHandler>();     
+        return services.AddScoped<IAddProductUseCase, AddProductUseCaseHandler>()
+                       .AddScoped<IListProductUseCase, ListProductUseCaseHandler>()
+                       .AddScoped<IUpdateProductUseCase, UpdateProductUseCaseHandler>();     
     }
 }

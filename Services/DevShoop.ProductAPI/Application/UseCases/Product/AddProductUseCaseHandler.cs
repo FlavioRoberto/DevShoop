@@ -17,11 +17,27 @@ public class AddProductUseCaseHandler : IAddProductUseCase
         _mapper = mapper;
     }
 
-    async Task<ProductViewModel> IUseCaseHandlerAsync<ProductViewModel, AddProductUseCase>.Execute(AddProductUseCase useCase)
+    public async Task<UseCaseResult<ProductViewModel>> Execute(AddProductUseCase useCase)
     {
+        var useCaseResult = new UseCaseResult<ProductViewModel>();
+
+        if (useCase.Price < 1)
+            useCaseResult.AddError("O preço deve ser superior a 1");
+
+        if (useCase.Price > 10000)
+            useCaseResult.AddError("O preço deve ser inferior a 10000");
+
         var product = _mapper.Map<Domain.Models.Product>(useCase);
+       
         _repository.Create(product);
+       
         await _repository.Commit();
-        return _mapper.Map<ProductViewModel>(product);
+       
+        var products = _mapper.Map<ProductViewModel>(product);
+
+        useCaseResult.AddData(products);
+
+        return useCaseResult;
     }
+
 }
