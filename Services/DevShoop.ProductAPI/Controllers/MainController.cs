@@ -7,7 +7,15 @@ namespace DevShoop.ProductAPI.Controllers;
 
 public abstract class MainController : ControllerBase
 {
-    public async Task<ActionResult<T>> Execute<T>(UseCaseResult<T> result)
+    protected IActionResult Execute(UseCaseResult result)
+    {
+        if (!result.IsValid())
+            return BadRequest(result.Errors);
+
+        return Ok();
+    }
+
+    protected ActionResult<T> Execute<T>(UseCaseResult<T> result)
     {
         if (!result.IsValid())
             return BadRequest(result.Errors);

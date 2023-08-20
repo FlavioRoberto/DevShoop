@@ -15,20 +15,27 @@ public class ProductController : MainController
     public async Task<ActionResult<ProductViewModel>> AddProduct([FromBody] AddProductUseCase addProduct, [FromServices] IAddProductUseCase addProductUseCase)
     {
         var addProductResult = await addProductUseCase.Execute(addProduct);
-        return await Execute(addProductResult);
+        return Execute(addProductResult);
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductViewModel>>> ListProducts([FromServices] IListProductUseCase listProductsUseCase)
     {
         var productResult = await listProductsUseCase.Execute();
-        return await Execute(productResult);
+        return Execute(productResult);
     }
 
     [HttpPut]
     public async Task<ActionResult<ProductViewModel>> UpdateProduct([FromBody] UpdateProductUseCase updateProduct, [FromServices] IUpdateProductUseCase updateProductUseCase)
     {
         var updateProductResult = await updateProductUseCase.Execute(updateProduct);
-        return await Execute(updateProductResult);
+        return Execute(updateProductResult);
+    }
+
+    [HttpDelete("/{Id}")]
+    public async Task<IActionResult> Remove(int Id, [FromServices] IRemoveProductUseCase removeProductUseCase)
+    {
+        var removeProductResult = await removeProductUseCase.Execute(new RemoveProductUseCase(Id));
+        return Execute(removeProductResult);
     }
 }
