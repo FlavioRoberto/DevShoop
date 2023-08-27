@@ -6,26 +6,21 @@ using DevShoop.ProductAPI.Application.ViewModels;
 
 namespace DevShoop.ProductAPI.Application.UseCases.Product;
 
-public class AddProductUseCaseHandler : IAddProductUseCase
+public class AddProductUseCaseHandler : UseCaseWithValidationHandler<UseCaseResult<ProductViewModel>, AddProductUseCase>, IAddProductUseCase
 {
     private readonly IProductRepository _repository;
     private readonly AddProductUseCaseValidator _validator;
     private readonly IMapper _mapper;
 
-    public AddProductUseCaseHandler(IProductRepository repository, IMapper mapper)
+    public AddProductUseCaseHandler(IProductRepository repository, IMapper mapper) : base(new AddProductUseCaseValidator())
     {
         _repository = repository;
         _mapper = mapper;
         _validator = new AddProductUseCaseValidator();
     }
 
-    public async Task<UseCaseResult<ProductViewModel>> Execute(AddProductUseCase useCase)
+    protected override async Task<UseCaseResult<ProductViewModel>> ExecuteUseCase(AddProductUseCase useCase)
     {
-        var useCaseResult = _validator.Validate(useCase);
-
-        if (!useCaseResult.IsValid())
-            return useCaseResult;
-
         var product = _mapper.Map<Domain.Models.Product>(useCase);
 
         _repository.Create(product);
@@ -34,9 +29,8 @@ public class AddProductUseCaseHandler : IAddProductUseCase
 
         var products = _mapper.Map<ProductViewModel>(product);
 
-        useCaseResult.AddData(products);
+        ValidationResult.AddData(products);
 
-        return useCaseResult;
+        return ValidationResult;
     }
-
 }

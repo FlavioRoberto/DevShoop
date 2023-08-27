@@ -26,7 +26,6 @@ public class UseCaseResult : IUseCaseResult
     {
         Errors.Add(error);
     }
-
 }
 
 public class UseCaseResult<T> : UseCaseResult
@@ -50,6 +49,11 @@ public class UseCaseResult<T> : UseCaseResult
     }
 }
 
+public interface IUseCaseValidator<TUseCase, TUseCaseResult> where TUseCase : UseCase where TUseCaseResult : IUseCaseResult
+{
+    TUseCaseResult Validate(TUseCase useCase);
+}
+
 public interface IUseCaseHandlerAsync<TResult> where TResult : IUseCaseResult
 {
     Task<TResult> Execute();
@@ -60,8 +64,24 @@ public interface IUseCaseHandlerAsync<TResult, T> where T : UseCase where TResul
     Task<TResult> Execute(T useCase);
 }
 
-public interface IUseCaseValidator<TUseCase, TUseCaseResult> where TUseCase : UseCase where TUseCaseResult : IUseCaseResult
+public abstract class UseCaseWithValidationHandler<TResult, T> : IUseCaseHandlerAsync<TResult, T> where T : UseCase where TResult : IUseCaseResult
 {
-    TUseCaseResult Validate(TUseCase useCase);
-}
+    public TResult ValidationResult { get; private set;}
+    private readonly IUseCaseValidator<T, TResult> _validator;
+    protected abstract Task<TResult> ExecuteUseCase(T useCase);
 
+    protected UseCaseWithValidationHandler(IUseCaseValidator<T, TResult> validator)
+    {
+        _validator = validator;
+    }
+
+    public async Task<TResult> Execute(T useCase)
+    {
+        ValidationResult = _validator.Validate(useCase);
+
+        if(!ValidationResult.IsValid())
+            return ValidationResult;
+
+        return await ExecuteUseCase(useCase);
+    }
+}
