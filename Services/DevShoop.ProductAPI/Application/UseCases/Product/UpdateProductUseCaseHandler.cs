@@ -6,24 +6,21 @@ using DevShoop.ProductAPI.Domain.UseCases.Product;
 
 namespace DevShoop.ProductAPI.Application.UseCases.Product;
 
-public class UpdateProductUseCaseHandler : IUpdateProductUseCase
+public class UpdateProductUseCaseHandler : UseCaseWithValidationHandler<UseCaseResult<ProductViewModel>, UpdateProductUseCase>, IUpdateProductUseCase
 {
     private readonly IProductRepository productRepository;
     private readonly IMapper mapper;
 
-    public UpdateProductUseCaseHandler(IProductRepository productRepository, IMapper mapper)
+    public UpdateProductUseCaseHandler(
+            IProductRepository productRepository, 
+            IMapper mapper) : base(new UpdateProductUseCaseValidator())
     {
         this.productRepository = productRepository;
         this.mapper = mapper;
     }
 
-    public async Task<UseCaseResult<ProductViewModel>> Execute(UpdateProductUseCase useCase)
+    protected override async Task<UseCaseResult<ProductViewModel>> ExecuteUseCase(UpdateProductUseCase useCase)
     {
-        var useCaseResult = new UseCaseResult<ProductViewModel>();
-
-        if (useCase.Id == null || useCase.Id <= 0)
-            useCaseResult.AddError("Campo Id não foi informado");
-
         var product = mapper.Map<Domain.Models.Product>(useCase);
 
         productRepository.Update(product);
@@ -32,8 +29,8 @@ public class UpdateProductUseCaseHandler : IUpdateProductUseCase
 
         var ProductViewModel = mapper.Map<ProductViewModel>(product);
 
-        useCaseResult.AddData(ProductViewModel);
+        ValidationResult.AddData(ProductViewModel);
 
-        return useCaseResult;
+        return ValidationResult;
     }
 }

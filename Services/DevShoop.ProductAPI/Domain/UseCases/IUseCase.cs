@@ -62,6 +62,7 @@ public interface IUseCaseHandlerAsync<TResult> where TResult : IUseCaseResult
 public interface IUseCaseHandlerAsync<TResult, T> where T : UseCase where TResult : IUseCaseResult
 {
     Task<TResult> Execute(T useCase);
+    TResult Validate(T useCase);
 }
 
 public abstract class UseCaseWithValidationHandler<TResult, T> : IUseCaseHandlerAsync<TResult, T> where T : UseCase where TResult : IUseCaseResult
@@ -77,11 +78,16 @@ public abstract class UseCaseWithValidationHandler<TResult, T> : IUseCaseHandler
 
     public async Task<TResult> Execute(T useCase)
     {
-        ValidationResult = _validator.Validate(useCase);
+        ValidationResult = Validate(useCase);
 
         if(!ValidationResult.IsValid())
             return ValidationResult;
 
         return await ExecuteUseCase(useCase);
+    }
+
+    public TResult Validate(T useCase)
+    {
+        return _validator.Validate(useCase);
     }
 }
