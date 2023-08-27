@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Config/" />
+    <Folder Include="Domain/UseCases/Product/AddProductUseCase/" />
   </ItemGroup>
 
 </Project>

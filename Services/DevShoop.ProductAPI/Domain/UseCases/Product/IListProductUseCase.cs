@@ -2,6 +2,6 @@
 
 namespace DevShoop.ProductAPI.Domain.UseCases.Product;
 
-public interface IListProductUseCase : IUseCaseHandlerAsync<IEnumerable<ProductViewModel>>
+public interface IListProductUseCase : IUseCaseHandlerAsync<UseCaseResult<IEnumerable<ProductViewModel>>>
 {
 }

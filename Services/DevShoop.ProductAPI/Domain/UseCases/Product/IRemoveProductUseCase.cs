@@ -10,6 +10,6 @@ public class RemoveProductUseCase : UseCase
     }
 }
 
-public interface IRemoveProductUseCase : IUseCaseHandlerWithouDataAsync<RemoveProductUseCase>
+public interface IRemoveProductUseCase : IUseCaseHandlerAsync<UseCaseResult, RemoveProductUseCase>
 {
 }

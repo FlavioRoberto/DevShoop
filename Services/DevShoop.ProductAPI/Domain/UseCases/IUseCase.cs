@@ -2,10 +2,16 @@
 
 public interface UseCase { }
 
-public class UseCaseResult
+public interface IUseCaseResult
+{
+    IList<string> Errors { get; }
+    bool IsValid();
+}
+
+public class UseCaseResult : IUseCaseResult
 {
     public IList<string> Errors { protected set; get; }
-    
+
     public UseCaseResult()
     {
         Errors = new List<string>();
@@ -25,7 +31,7 @@ public class UseCaseResult
 
 public class UseCaseResult<T> : UseCaseResult
 {
-    public T Data { private set; get; }
+    public T Data { set; get; }
 
     public UseCaseResult()
     {
@@ -44,18 +50,18 @@ public class UseCaseResult<T> : UseCaseResult
     }
 }
 
-public interface IUseCaseHandlerAsync<TResult, T> where T : UseCase
+public interface IUseCaseHandlerAsync<TResult> where TResult : IUseCaseResult
 {
-    Task<UseCaseResult<TResult>> Execute(T useCase);
+    Task<TResult> Execute();
 }
 
-public interface IUseCaseHandlerWithouDataAsync<T> where T : UseCase
+public interface IUseCaseHandlerAsync<TResult, T> where T : UseCase where TResult : IUseCaseResult
 {
-    Task<UseCaseResult> Execute(T useCase);
+    Task<TResult> Execute(T useCase);
 }
 
-
-public interface IUseCaseHandlerAsync<TResult>
+public interface IUseCaseValidator<TUseCase, TUseCaseResult> where TUseCase : UseCase where TUseCaseResult : IUseCaseResult
 {
-    Task<UseCaseResult<TResult>> Execute();
+    TUseCaseResult Validate(TUseCase useCase);
 }
+

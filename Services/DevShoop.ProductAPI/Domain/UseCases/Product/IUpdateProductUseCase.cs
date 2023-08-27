@@ -16,6 +16,6 @@ public class UpdateProductUseCase : UseCase
     public string ImageUrl { get; set; }
 }
 
-public interface IUpdateProductUseCase : IUseCaseHandlerAsync<ProductViewModel, UpdateProductUseCase>
+public interface IUpdateProductUseCase : IUseCaseHandlerAsync<UseCaseResult<ProductViewModel>, UpdateProductUseCase>
 {
 }
