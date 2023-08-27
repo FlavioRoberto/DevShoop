@@ -9,14 +9,12 @@ namespace DevShoop.ProductAPI.Application.UseCases.Product;
 public class AddProductUseCaseHandler : UseCaseWithValidationHandler<UseCaseResult<ProductViewModel>, AddProductUseCase>, IAddProductUseCase
 {
     private readonly IProductRepository _repository;
-    private readonly AddProductUseCaseValidator _validator;
     private readonly IMapper _mapper;
 
     public AddProductUseCaseHandler(IProductRepository repository, IMapper mapper) : base(new AddProductUseCaseValidator())
     {
         _repository = repository;
         _mapper = mapper;
-        _validator = new AddProductUseCaseValidator();
     }
 
     protected override async Task<UseCaseResult<ProductViewModel>> ExecuteUseCase(AddProductUseCase useCase)
