@@ -6,12 +6,16 @@ using DevShoop.ProductAPI.Application.ViewModels;
 
 namespace DevShoop.ProductAPI.Application.UseCases.Product;
 
+public interface IAddProductUseCase : IUseCaseHandlerAsync<UseCaseResult<ProductViewModel>, AddProductUseCase>
+{
+}
+
 public class AddProductUseCaseHandler : UseCaseWithValidationHandler<UseCaseResult<ProductViewModel>, AddProductUseCase>, IAddProductUseCase
 {
     private readonly IProductRepository _repository;
     private readonly IMapper _mapper;
 
-    public AddProductUseCaseHandler(IProductRepository repository, IMapper mapper) : base(new AddProductUseCaseValidator())
+    public AddProductUseCaseHandler(IProductRepository repository, IMapper mapper) : base(new AddProductUseCaseValidator<ProductViewModel>())
     {
         _repository = repository;
         _mapper = mapper;

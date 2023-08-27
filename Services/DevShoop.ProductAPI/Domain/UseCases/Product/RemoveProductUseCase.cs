@@ -22,7 +22,3 @@ public class RemoveProductUseCaseValidator : IUseCaseValidator<RemoveProductUseC
         return useCaseResult;
     }
 }
-
-public interface IRemoveProductUseCase : IUseCaseHandlerAsync<UseCaseResult, RemoveProductUseCase>
-{
-}

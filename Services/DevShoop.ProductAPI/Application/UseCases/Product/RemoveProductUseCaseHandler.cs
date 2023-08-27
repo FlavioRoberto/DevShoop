@@ -4,6 +4,10 @@ using DevShoop.ProductAPI.Domain.UseCases.Product;
 
 namespace DevShoop.ProductAPI.Application.UseCases.Product;
 
+public interface IRemoveProductUseCase : IUseCaseHandlerAsync<UseCaseResult, RemoveProductUseCase>
+{
+}
+
 public class RemoveProductUseCaseHandler : UseCaseWithValidationHandler<UseCaseResult, RemoveProductUseCase>, IRemoveProductUseCase
 {
     private readonly IProductRepository _productRepository;

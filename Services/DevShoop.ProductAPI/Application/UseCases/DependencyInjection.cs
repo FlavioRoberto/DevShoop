@@ -1,7 +1,4 @@
 ﻿using DevShoop.ProductAPI.Application.UseCases.Product;
-using DevShoop.ProductAPI.Application.ViewModels;
-using DevShoop.ProductAPI.Domain.UseCases;
-using DevShoop.ProductAPI.Domain.UseCases.Product;
 
 namespace DevShoop.ProductAPI.Application.UseCases;
 

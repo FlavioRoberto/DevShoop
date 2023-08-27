@@ -6,6 +6,10 @@ using DevShoop.ProductAPI.Domain.UseCases.Product;
 
 namespace DevShoop.ProductAPI.Application.UseCases.Product;
 
+public interface IUpdateProductUseCase : IUseCaseHandlerAsync<UseCaseResult<ProductViewModel>, UpdateProductUseCase>
+{
+}
+
 public class UpdateProductUseCaseHandler : UseCaseWithValidationHandler<UseCaseResult<ProductViewModel>, UpdateProductUseCase>, IUpdateProductUseCase
 {
     private readonly IProductRepository productRepository;
@@ -13,7 +17,7 @@ public class UpdateProductUseCaseHandler : UseCaseWithValidationHandler<UseCaseR
 
     public UpdateProductUseCaseHandler(
             IProductRepository productRepository, 
-            IMapper mapper) : base(new UpdateProductUseCaseValidator())
+            IMapper mapper) : base(new UpdateProductUseCaseValidator<ProductViewModel>())
     {
         this.productRepository = productRepository;
         this.mapper = mapper;

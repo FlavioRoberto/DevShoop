@@ -16,19 +16,15 @@ public class UpdateProductUseCase : UseCase
     public string ImageUrl { get; set; }
 }
 
-public class UpdateProductUseCaseValidator : IUseCaseValidator<UpdateProductUseCase, UseCaseResult<ProductViewModel>>
+public class UpdateProductUseCaseValidator<T> : IUseCaseValidator<UpdateProductUseCase, UseCaseResult<T>>
 {
-    public UseCaseResult<ProductViewModel> Validate(UpdateProductUseCase useCase)
+    public UseCaseResult<T> Validate(UpdateProductUseCase useCase)
     {
-        var useCaseResult = new UseCaseResult<ProductViewModel>();
+        var useCaseResult = new UseCaseResult<T>();
 
         if (useCase.Id == null || useCase.Id <= 0)
             useCaseResult.AddError("Campo Id não foi informado");
 
         return useCaseResult;
     }
-}
-
-public interface IUpdateProductUseCase : IUseCaseHandlerAsync<UseCaseResult<ProductViewModel>, UpdateProductUseCase>
-{
 }

@@ -6,6 +6,10 @@ using DevShoop.ProductAPI.Domain.UseCases.Product;
 
 namespace DevShoop.ProductAPI.Application.UseCases.Product;
 
+public interface IListProductUseCase : IUseCaseHandlerAsync<UseCaseResult<IEnumerable<ProductViewModel>>>
+{
+}
+
 public class ListProductUseCaseHandler : IListProductUseCase
 {
     private readonly IProductRepository _productRepository;

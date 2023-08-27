@@ -15,11 +15,11 @@ public class AddProductUseCase : UseCase
     public string ImageUrl { get; set; }
 }
 
-public class AddProductUseCaseValidator : IUseCaseValidator<AddProductUseCase, UseCaseResult<ProductViewModel>>
+public class AddProductUseCaseValidator<T> : IUseCaseValidator<AddProductUseCase, UseCaseResult<T>>
 {
-    public UseCaseResult<ProductViewModel> Validate(AddProductUseCase useCase)
+    public UseCaseResult<T> Validate(AddProductUseCase useCase)
     {
-        var useCaseResult = new UseCaseResult<ProductViewModel>();
+        var useCaseResult = new UseCaseResult<T>();
 
         if (useCase.Price < 1)
             useCaseResult.AddError("O preço deve ser superior a 1");
@@ -31,6 +31,4 @@ public class AddProductUseCaseValidator : IUseCaseValidator<AddProductUseCase, U
     }
 }
 
-public interface IAddProductUseCase : IUseCaseHandlerAsync<UseCaseResult<ProductViewModel>, AddProductUseCase>
-{
-}
+
