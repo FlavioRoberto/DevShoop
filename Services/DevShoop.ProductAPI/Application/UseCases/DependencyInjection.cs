@@ -9,6 +9,7 @@ public static class DependencyInjection
         return services.AddScoped<IAddProductUseCase, AddProductUseCaseHandler>()
                        .AddScoped<IListProductUseCase, ListProductUseCaseHandler>()
                        .AddScoped<IUpdateProductUseCase, UpdateProductUseCaseHandler>()
-                       .AddScoped<IRemoveProductUseCase, RemoveProductUseCaseHandler>();
+                       .AddScoped<IRemoveProductUseCase, RemoveProductUseCaseHandler>()
+                       .AddScoped<IFindProductByIdUseCase, FindProductByIdUseCaseHandler>();
     }
 }

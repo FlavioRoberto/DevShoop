@@ -26,6 +26,13 @@ public class ProductController : MainController
         return Execute(productResult);
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ProductViewModel>> GetProduct([FromServices] IFindProductByIdUseCase findProductByIdUseCase, int id)
+    {
+        var productResult = await findProductByIdUseCase.Execute(new FindProductByIdUseCase(id));
+        return Execute(productResult);
+    }
+
     [HttpPut]
     public async Task<ActionResult<ProductViewModel>> UpdateProduct([FromBody] UpdateProductUseCase updateProduct, [FromServices] IUpdateProductUseCase updateProductUseCase)
     {
@@ -33,7 +40,7 @@ public class ProductController : MainController
         return Execute(updateProductResult);
     }
 
-    [HttpDelete("/{Id}")]
+    [HttpDelete("{Id}")]
     public async Task<IActionResult> Remove(int Id, [FromServices] IRemoveProductUseCase removeProductUseCase)
     {
         var removeProductResult = await removeProductUseCase.Execute(new RemoveProductUseCase(Id));

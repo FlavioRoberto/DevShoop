@@ -33,7 +33,7 @@ public static class HttpClientExtension
     public static Task<HttpResponseMessage> PutAsJson<T>(this HttpClient httpClient, string url, T data)
     {
         var content = CreateContent(data);
-        return httpClient.PutAsJson(url, content);
+        return httpClient.PutAsync(url, content);
     }
 
     public static Task<HttpResponseMessage> Get(this HttpClient httpClient, string url)
